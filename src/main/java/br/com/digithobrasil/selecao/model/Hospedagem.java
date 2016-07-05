@@ -1,5 +1,5 @@
 package br.com.digithobrasil.selecao.model;
 
-public class Hotel extends Custo{
+public class Hospedagem extends Custo{
 
 }
