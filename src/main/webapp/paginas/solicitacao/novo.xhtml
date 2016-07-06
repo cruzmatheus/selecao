@@ -26,8 +26,19 @@
 						<p:fieldset legend="Custos de viagem" toggleable="true" style="margin-top: 20px;">
 							<ui:include src="/paginas/custo/form.xhtml" />
 						</p:fieldset>
+						
+						<p:fieldset legend="Justificativa" toggleable="true" style="margin-top: 20px;">
+							<h:panelGrid columns="3">
+								<p:outputLabel value="Justificativa" for="iJustificativa" />
+								<p:inputTextarea 
+											value="#{solicitacaoController.solicitacao.justificativa}"
+											id="iJustificativa" required="true"
+											requiredMessage="Campo necessário" />
+								<p:message for="iJustificativa" style="color: red;" />
+							</h:panelGrid>
+						</p:fieldset>
 		
-					<p:commandButton value="Efetuar solicitação" action="#{solicitacaoController.efetuarSolicitacao()}" ajax="false" style="margin-top: 20px;" />
+					<p:commandButton id="efetuar_solicitacao" value="Efetuar solicitação" action="#{solicitacaoController.efetuarSolicitacao()}" ajax="false" style="margin-top: 20px;" />
 				</p:panel>	
 		</h:form>	
 	</ui:define>

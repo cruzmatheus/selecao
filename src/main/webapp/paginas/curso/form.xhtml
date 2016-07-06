@@ -12,9 +12,9 @@
 				requiredMessage="Campo necessário" />
 			<p:message for="iTituloCurso" style="color: red;" />
 			
-			<p:outputLabel value="Matrícula do colaborador" for="iDataCurso" />
+			<p:outputLabel value="Data do curso" for="iDataCurso" />
 			<p:calendar id="iDataCurso" navigator="true"
-						locale="pt" showOn="button" pattern="dd/MM/yyyy" required="true" requiredMessage="Campo necessário"
+						locale="pt" pattern="dd/MM/yyyy" required="true" requiredMessage="Campo necessário"
 						mask="true" value="#{solicitacaoController.curso.data}" />
 			<p:message for="iDataCurso" style="color: red;" />
 			
@@ -25,15 +25,15 @@
 				requiredMessage="Campo necessário" />
 			<p:message for="iCargaHorariaCurso" style="color: red;" />
 			
-			<p:outputLabel value="Conta corrente" for="iCidadeCurso" />
-			<p:inputText maxlength="10"
+			<p:outputLabel value="Cidade" for="iCidadeCurso" />
+			<p:inputText maxlength="30"
 				value="#{solicitacaoController.curso.cidade}"
 				id="iCidadeCurso" required="true"
 				requiredMessage="Campo necessário" />
 			<p:message for="iCidadeCurso" style="color: red;" />
 			
-			<p:outputLabel value="Conta corrente" for="iLocalCurso" />
-			<p:inputText maxlength="10"
+			<p:outputLabel value="Local" for="iLocalCurso" />
+			<p:inputText maxlength="100"
 				value="#{solicitacaoController.curso.local}"
 				id="iLocalCurso" required="true"
 				requiredMessage="Campo necessário" />

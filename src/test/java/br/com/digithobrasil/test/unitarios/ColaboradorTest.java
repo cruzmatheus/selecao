@@ -1,4 +1,4 @@
-package br.com.digithobrasil.test;
+package br.com.digithobrasil.test.unitarios;
 
 import org.junit.Before;
 import org.junit.Test;

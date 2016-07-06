@@ -6,52 +6,52 @@
 
 	<h:panelGrid columns="3">
 		<p:outputLabel value="Nome do colaborador" for="iNomeColaborador" />
-			<p:inputText maxlength="50"
-				value="#{solicitacaoController.colaborador.nome}"
-				id="iNomeColaborador" required="true"
-				requiredMessage="Campo necessário" />
-			<p:message for="iNomeColaborador" style="color: red;" />
-			
-			<p:outputLabel value="Cargo do colaborador" for="iCargoColaborador" />
-			<p:selectOneMenu id="iCargoColaborador" value="#{solicitacaoController.colaborador.cargo}" required="true">
-				<f:selectItem itemLabel="Selecione o cargo" itemValue="" noSelectionOption="true" />
-				<f:selectItems value="#{solicitacaoController.cargos}" var="c" itemLabel="#{c.titulo}" itemValue="#{c.chave}" />
-			</p:selectOneMenu>
-			<p:message for="iCargoColaborador" style="color: red;" />
-			
-			<p:outputLabel value="Matrícula do colaborador" for="iMatriculaColaborador" />
-			<p:inputText maxlength="10"
-				value="#{solicitacaoController.colaborador.matricula}"
-				id="iMatriculaColaborador" required="true"
-				requiredMessage="Campo necessário" />
-			<p:message for="iMatriculaColaborador" style="color: red;" />
-			
-			<p:outputLabel value="Matrícula do colaborador" for="iDataNascimentoColaborador" />
-			<p:calendar id="iDataNascimentoColaborador" navigator="true"
-						locale="pt" showOn="button" pattern="dd/MM/yyyy" required="true" requiredMessage="Campo necessário"
-						mask="true" value="#{solicitacaoController.colaborador.dataNascimento}" />
-			<p:message for="iDataNascimentoColaborador" style="color: red;" />
-			
-			<p:outputLabel value="RG do colaborador" for="iRgColaborador" />
-			<p:inputText maxlength="10"
-				value="#{solicitacaoController.colaborador.rg}"
-				id="iRgColaborador" required="true"
-				requiredMessage="Campo necessário" />
-			<p:message for="iRgColaborador" style="color: red;" />
-			
-			<p:outputLabel value="CPF do colaborador" for="iCpfColaborador" />
-			<p:inputText maxlength="11"
-				value="#{solicitacaoController.colaborador.cpf}"
-				id="iCpfColaborador" required="true"
-				requiredMessage="Campo necessário" />
-			<p:message for="iCpfColaborador" style="color: red;" />
-			
-			<p:outputLabel value="Email do colaborador" for="iEmailColaborador" />
-			<p:inputText maxlength="50"
-				value="#{solicitacaoController.colaborador.email}"
-				id="iEmailColaborador" required="true"
-				requiredMessage="Campo necessário" />
-			<p:message for="iEmailColaborador" style="color: red;" />
+		<p:inputText maxlength="50"
+			value="#{solicitacaoController.colaborador.nome}"
+			id="iNomeColaborador" required="true"
+			requiredMessage="Campo necessário" />
+		<p:message for="iNomeColaborador" style="color: red;" />
+		
+		<p:outputLabel value="Cargo do colaborador" for="iCargoColaborador" />
+		<p:selectOneMenu id="iCargoColaborador" value="#{solicitacaoController.colaborador.cargo}" required="true">
+			<f:selectItem itemLabel="Selecione o cargo" itemValue="" noSelectionOption="true" />
+			<f:selectItems value="#{solicitacaoController.cargos}" var="c" itemLabel="#{c.titulo}" itemValue="#{c.chave}" />
+		</p:selectOneMenu>
+		<p:message for="iCargoColaborador" style="color: red;" />
+		
+		<p:outputLabel value="Matrícula do colaborador" for="iMatriculaColaborador" />
+		<p:inputText maxlength="10"
+			value="#{solicitacaoController.colaborador.matricula}"
+			id="iMatriculaColaborador" required="true"
+			requiredMessage="Campo necessário" />
+		<p:message for="iMatriculaColaborador" style="color: red;" />
+		
+		<p:outputLabel value="Data de nascimento" for="iDataNascimentoColaborador" />
+		<p:calendar id="iDataNascimentoColaborador" navigator="true"
+					locale="pt" pattern="dd/MM/yyyy" required="true" requiredMessage="Campo necessário"
+					mask="true" value="#{solicitacaoController.colaborador.dataNascimento}" />
+		<p:message for="iDataNascimentoColaborador" style="color: red;" />
+		
+		<p:outputLabel value="RG do colaborador" for="iRgColaborador" />
+		<p:inputText maxlength="10"
+			value="#{solicitacaoController.colaborador.rg}"
+			id="iRgColaborador" required="true"
+			requiredMessage="Campo necessário" />
+		<p:message for="iRgColaborador" style="color: red;" />
+		
+		<p:outputLabel value="CPF do colaborador" for="iCpfColaborador" />
+		<p:inputText maxlength="14"
+			value="#{solicitacaoController.colaborador.cpf}"
+			id="iCpfColaborador" required="true"
+			requiredMessage="Campo necessário" />
+		<p:message for="iCpfColaborador" style="color: red;" />
+		
+		<p:outputLabel value="Email do colaborador" for="iEmailColaborador" />
+		<p:inputText maxlength="50"
+			value="#{solicitacaoController.colaborador.email}"
+			id="iEmailColaborador" required="true"
+			requiredMessage="Campo necessário" />
+		<p:message for="iEmailColaborador" style="color: red;" />
 	</h:panelGrid>
 </ui:composition>
 

@@ -1,6 +1,7 @@
 package br.com.digithobrasil.selecao.service;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.ejb.EJB;
 
@@ -16,6 +17,10 @@ public class SolicitacaoService implements Serializable {
 	
 	public void salvar(Solicitacao solicitacao) {
 		solicitacaoRepositorio.salvar(solicitacao);
+	}
+	
+	public List<Solicitacao> buscarTodas() {
+		return solicitacaoRepositorio.buscarTodos();
 	}
 	
 

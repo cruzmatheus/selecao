@@ -15,9 +15,9 @@ public class Solicitacao extends SolicitacaoRepositorio implements Serializable 
 	
 	private Colaborador colaborador;
 	private Curso curso;
+	private List<Custo> custos;
 	private String justificativa;
 	private float percentualSubsidio;
-	private List<Custo> custos;
 	
 	public void preencherSolicitacao(Colaborador colaborador, Curso curso, List<Custo> custos) {
 		this.colaborador = colaborador;

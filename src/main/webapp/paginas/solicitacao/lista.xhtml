@@ -1,0 +1,44 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui"
+	template="/paginas/index.xhtml">
+	
+	<ui:define name="titulo">Solicitações</ui:define>
+	
+	<ui:define name="conteudo">
+		<h:form id="frmLista" prependId="false">
+			
+		<p:panel id="painelConsulta" styleClass="box_shadow">
+			<p:dataTable value="#{solicitacaoController.solicitacoes}" var="s" paginator="true" 
+			rows="15" rowsPerPageTemplate="15,25,50" paginatorPosition="bottom"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+			currentPageReportTemplate=" {startRecord} de {endRecord} no total de {totalRecords} - Página: {currentPage}/{totalPages} "
+			emptyMessage="Nenhum registro">
+			
+				<p:column filterBy="#{s.colaborador.nome}" headerText="Nome colaborador" width="4%">
+					<h:outputText value="#{s.colaborador.nome}"  />
+				</p:column>
+				
+				<p:column filterBy="#{s.curso.titulo}" headerText="Título do curso" width="10%">
+					<h:outputText value="#{s.curso.titulo}"  />
+				</p:column>
+				
+				<p:column filterBy="#{s.curso.data}" headerText="Data do curso" width="2%">
+					<h:outputText value="#{s.curso.data}"  />
+				</p:column>
+				
+				<p:column filterBy="#{s.curso.cidade}" headerText="Cidade" width="2%">
+					<h:outputText value="#{s.curso.cidade}"  />
+				</p:column>
+				
+			</p:dataTable>
+			
+			</p:panel>
+			
+		</h:form>
+		
+	</ui:define>
+</ui:composition>

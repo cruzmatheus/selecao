@@ -22,6 +22,7 @@ import br.com.digithobrasil.selecao.model.Passagem;
 import br.com.digithobrasil.selecao.model.Solicitacao;
 import br.com.digithobrasil.selecao.model.Transporte;
 import br.com.digithobrasil.selecao.service.SolicitacaoService;
+import br.com.digithobrasil.selecao.util.FacesUtil;
 
 @ViewAccessScoped
 @Named
@@ -39,15 +40,30 @@ public class SolicitacaoController implements Serializable {
 	private Curso curso;
 	@Inject
 	private SolicitacaoService solicitacaoService;
+	@Inject
+	private NavegacaoController navegacaoController;
 	
 	private String tipoCusto;
 	private double valorCusto;
 	
+	private List<Solicitacao> solicitacoes = new ArrayList<Solicitacao>();
+	
 	private List<Custo> custos = new ArrayList<Custo>();
 	
-	public void efetuarSolicitacao() {
-		solicitacao.preencherSolicitacao(colaborador, curso, custos);
-		solicitacaoService.salvar(solicitacao);
+	public String efetuarSolicitacao() {
+		try {
+			solicitacao.preencherSolicitacao(colaborador, curso, custos);
+			solicitacaoService.salvar(solicitacao);
+			FacesUtil.addSucessMessage("Solicitação cadastrada com sucesso");
+		} catch (Exception e) {
+			FacesUtil.addErrorMessage(String.format("Erro ao cadastrara a solicitacao. Erro: %s", e.getMessage()));
+		}
+		
+		return navegacaoController.listaSolicitacoes();
+	}
+	
+	public void buscarTodas() {
+		setSolicitacoes(solicitacaoService.buscarTodas());
 	}
 	
 	public void adicionarCusto() {
@@ -146,6 +162,14 @@ public class SolicitacaoController implements Serializable {
 
 	public void setValorCusto(double valorCusto) {
 		this.valorCusto = valorCusto;
+	}
+
+	public List<Solicitacao> getSolicitacoes() {
+		return solicitacoes;
+	}
+
+	public void setSolicitacoes(List<Solicitacao> solicitacoes) {
+		this.solicitacoes = solicitacoes;
 	}
 	
 	

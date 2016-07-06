@@ -1,6 +1,7 @@
 package br.com.digithobrasil.selecao.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,8 +26,7 @@ public class SolicitacaoRepositorio extends Repositorio<Solicitacao> implements 
 
 	@Override
 	public List<Solicitacao> buscarTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<>(solicitacaoDb.values());
 	}
 
 }

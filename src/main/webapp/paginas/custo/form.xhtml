@@ -15,12 +15,11 @@
 		
 		<p:outputLabel value="Valor" for="iValorCusto" />
 		<p:inputText id="iValorCusto" value="#{solicitacaoController.valorCusto}">
-            <f:convertNumber type="currency" currencySymbol="R$" />
-            <p:ajax event="keyup" listener="#{solicitacaoController.handleKeyEvent}" />
+            <p:ajax event="change" listener="#{solicitacaoController.handleKeyEvent}" />
         </p:inputText>
 		<p:message for="iValorCusto" style="color: red;" />
 		
-		<p:commandButton value="Adicionar custo" icon="ui-icon-check">
+		<p:commandButton id="adicionar_custo" value="Adicionar custo" icon="ui-icon-check">
 			<p:ajax listener="#{solicitacaoController.adicionarCusto()}" update="listaCustos"/>	
 		</p:commandButton>
 	</h:panelGrid>

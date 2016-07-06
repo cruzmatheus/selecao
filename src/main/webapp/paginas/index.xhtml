@@ -10,9 +10,11 @@
 </h:head>
 <h:body>
 
-	<h:form>
+	<p:messages id="messages" showIcon="true" showDetail="true" globalOnly="true" autoUpdate="true"  closable="true"/>
+
+	<h:form prependId="false">
 		<p:menu>
-	       <p:menuitem value="Nova Solicitação" action="#{navegacaoController.novaSolicitacao()}" icon="ui-icon-star" ajax="false"/>
+	       <p:menuitem id="nova_solicitacao" value="Nova Solicitação" action="#{navegacaoController.novaSolicitacao()}" icon="ui-icon-star" ajax="false"/>
 	    </p:menu>
 	</h:form>
 	

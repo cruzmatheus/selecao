@@ -1,4 +1,4 @@
-package br.com.digithobrasil.test;
+package br.com.digithobrasil.test.unitarios;
 
 import java.util.Calendar;
 
