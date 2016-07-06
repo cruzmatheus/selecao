@@ -1,9 +1,17 @@
-package selecao;
+package br.com.digithobrasil.test;
 
 
-import org.junit.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
-import static org.junit.Assert.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+
 import br.com.digithobrasil.selecao.model.Colaborador;
 import br.com.digithobrasil.selecao.model.Custo;
 import br.com.digithobrasil.selecao.model.Hospedagem;
@@ -27,8 +35,8 @@ public class SolicitacaoTest  {
 	
 	@Test
 	public void testAdicionaColaboradorASolicitacao() {
-		Colaborador colaborador = ColaboradorFactory.buildColaborador();
-		solicitacao.adicionarColaborador(colaborador);
+		Colaborador colaborador = ColaboradorFactory.buildColaboradorComDadosBancarios();
+		solicitacao.setColaborador(colaborador);
 
 		assertNotNull(solicitacao.getColaborador());
 		assertEquals(solicitacao.getColaborador().getNome(), "Matheus");
@@ -39,7 +47,11 @@ public class SolicitacaoTest  {
 		Custo passagem = new Passagem();
 		Custo hospedagem = new Hospedagem();
 		
-		solicitacao.adicionarCusto(passagem, hospedagem);
+		List<Custo> custos = new ArrayList<Custo>();
+		custos.add(passagem);
+		custos.add(hospedagem);
+		
+		solicitacao.adicionarCusto(custos);
 		
 		assertEquals(solicitacao.getCustos().size(), 2);
 		assertArrayEquals(solicitacao.getCustos().toArray(), new Custo[] {passagem, hospedagem});

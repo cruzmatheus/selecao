@@ -1,6 +1,10 @@
 package br.com.digithobrasil.selecao.model;
 
-public class DadosBancarios {
+import java.io.Serializable;
+
+public class DadosBancarios implements Serializable {
+	
+	private static final long serialVersionUID = 6547393770872739246L;
 	
 	private String banco;
 	private String agencia;
@@ -14,6 +18,32 @@ public class DadosBancarios {
 		this.agencia = agencia;
 		this.contaCorrente = contaCorrente;
 	}
+
+	public String getBanco() {
+		return banco;
+	}
+
+	public void setBanco(String banco) {
+		this.banco = banco;
+	}
+
+	public String getAgencia() {
+		return agencia;
+	}
+
+	public void setAgencia(String agencia) {
+		this.agencia = agencia;
+	}
+
+	public String getContaCorrente() {
+		return contaCorrente;
+	}
+
+	public void setContaCorrente(String contaCorrente) {
+		this.contaCorrente = contaCorrente;
+	}
+	
+	
 	
 	
 

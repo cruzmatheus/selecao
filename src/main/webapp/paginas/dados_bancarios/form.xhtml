@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:panelGrid columns="3">
+		<p:outputLabel value="Banco" for="iBanco" />
+			<p:inputText maxlength="3"
+				value="#{solicitacaoController.dadosBancarios.banco}"
+				id="iBanco" required="true"
+				requiredMessage="Campo necessário" />
+			<p:message for="iBanco" style="color: red;" />
+			
+			<p:outputLabel value="Agência" for="iAgencia" />
+			<p:inputText maxlength="4"
+				value="#{solicitacaoController.dadosBancarios.agencia}"
+				id="iAgencia" required="true"
+				requiredMessage="Campo necessário" />
+			<p:message for="iAgencia" style="color: red;" />
+			
+			<p:outputLabel value="Conta corrente" for="iContaCorrente" />
+			<p:inputText maxlength="10"
+				value="#{solicitacaoController.dadosBancarios.contaCorrente}"
+				id="iContaCorrente" required="true"
+				requiredMessage="Campo necessário" />
+			<p:message for="iContaCorrente" style="color: red;" />
+	</h:panelGrid>
+</ui:composition>
+
+

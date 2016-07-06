@@ -1,25 +1,34 @@
 package br.com.digithobrasil.selecao.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Solicitacao {
+import javax.inject.Inject;
 
+import br.com.digithobrasil.selecao.service.SolicitacaoService;
+
+public class Solicitacao extends SolicitacaoRepositorio implements Serializable {
+
+	private static final long serialVersionUID = 7294175903002652142L;
+	
 	private Colaborador colaborador;
 	private Curso curso;
 	private String justificativa;
 	private float percentualSubsidio;
 	private List<Custo> custos;
 	
-	public void adicionarColaborador(Colaborador colaborador) {
+	public void preencherSolicitacao(Colaborador colaborador, Curso curso, List<Custo> custos) {
 		this.colaborador = colaborador;
+		this.curso = curso;
+		this.adicionarCusto(custos);
 	}
 	
-	public void adicionarCusto(Custo... custos) {
-		this.custos = Arrays.asList(custos);
+	public void adicionarCusto(List<Custo> custos) {
+		this.custos = custos;
 	}
-
+	
 	public Colaborador getColaborador() {
 		return colaborador;
 	}

@@ -1,8 +1,11 @@
 package br.com.digithobrasil.selecao.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Colaborador {
+public class Colaborador implements Serializable {
+	
+	private static final long serialVersionUID = 6510214439391054492L;
 	
 	private String nome;
 	private String cargo;
@@ -30,7 +33,21 @@ public class Colaborador {
 		this.telefone = telefone;
 		this.dadosBancarios = dadosBancarios;
 	}
-
+	
+	public Colaborador(String nome, String cargo, String matricula,
+			Date dataNascimento, String rg, String cpf, String email,
+			String telefone) {
+		super();
+		this.nome = nome;
+		this.cargo = cargo;
+		this.matricula = matricula;
+		this.dataNascimento = dataNascimento;
+		this.rg = rg;
+		this.cpf = cpf;
+		this.email = email;
+		this.telefone = telefone;
+	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -102,7 +119,7 @@ public class Colaborador {
 	public void setDadosBancarios(DadosBancarios dadosBancarios) {
 		this.dadosBancarios = dadosBancarios;
 	}
-	
+
 	
 
 }

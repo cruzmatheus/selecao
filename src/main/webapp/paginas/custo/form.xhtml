@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:panelGrid columns="3">
+		<p:outputLabel value="Tipo de custo" for="iTipoCusto" />
+		<p:selectOneMenu id="iTipoCusto" value="#{solicitacaoController.tipoCusto}">
+			<p:ajax listener="#{solicitacaoController.onChange}" />
+			<f:selectItem itemLabel="Selecione o tipo de custo" itemValue="" noSelectionOption="true" />
+			<f:selectItems value="#{solicitacaoController.tipoCustos}" var="c" itemLabel="#{c.titulo}" itemValue="#{c.chave}" />
+		</p:selectOneMenu>
+		<p:message for="iTipoCusto" style="color: red;" />
+		
+		<p:outputLabel value="Valor" for="iValorCusto" />
+		<p:inputText id="iValorCusto" value="#{solicitacaoController.valorCusto}">
+            <f:convertNumber type="currency" currencySymbol="R$" />
+            <p:ajax event="keyup" listener="#{solicitacaoController.handleKeyEvent}" />
+        </p:inputText>
+		<p:message for="iValorCusto" style="color: red;" />
+		
+		<p:commandButton value="Adicionar custo" icon="ui-icon-check">
+			<p:ajax listener="#{solicitacaoController.adicionarCusto()}" update="listaCustos"/>	
+		</p:commandButton>
+	</h:panelGrid>
+	
+	<p:dataTable id="listaCustos" widgetVar="listaCustos"
+		var="c" paginator="true" rows="5"
+		paginatorPosition="bottom"
+		emptyMessage="Nenhum registro encontrado."
+		value="#{solicitacaoController.custos}" lazy="true" width="25%">
+		<p:column>
+			<f:facet name="header">
+     			Custo
+			</f:facet>
+			<h:outputText value="#{c.tipoCusto}" />
+		</p:column>
+		
+		<p:column>
+			<f:facet name="header">
+     			Valor
+			</f:facet>
+			<h:outputText value="#{c.valor}">
+				<f:convertNumber type="currency" currencySymbol="R$" />
+			</h:outputText>
+		</p:column>
+	</p:dataTable>
+</ui:composition>

@@ -1,0 +1,34 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" 
+	template="/paginas/index.xhtml">
+
+<ui:define name="titulo">Nova solicitação</ui:define>
+	<ui:define name="conteudo">
+		<h:form id="formSolicitacao" prependId="false">
+			<p:panel id="panelSolicitacao" header="Formulário de solicitação de subsídio" toggleable="true" closable="false"  
+				toggleSpeed="500" closeSpeed="500" widgetVar="panelSolicitacao" style="margin-bottom:20px">
+		
+						<p:fieldset legend="Dados do colaborador" toggleable="true">
+							<ui:include src="/paginas/colaborador/form.xhtml" />
+						</p:fieldset>
+						
+						<p:fieldset legend="Dados Bancários" toggleable="true" style="margin-top: 20px;">
+							<ui:include src="/paginas/dados_bancarios/form.xhtml" />
+						</p:fieldset>
+						
+						<p:fieldset legend="Dados do curso" toggleable="true" style="margin-top: 20px;">
+							<ui:include src="/paginas/curso/form.xhtml" />
+						</p:fieldset>
+						
+						<p:fieldset legend="Custos de viagem" toggleable="true" style="margin-top: 20px;">
+							<ui:include src="/paginas/custo/form.xhtml" />
+						</p:fieldset>
+		
+					<p:commandButton value="Efetuar solicitação" action="#{solicitacaoController.efetuarSolicitacao()}" ajax="false" style="margin-top: 20px;" />
+				</p:panel>	
+		</h:form>	
+	</ui:define>
+</ui:composition>

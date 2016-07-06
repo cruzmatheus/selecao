@@ -10,8 +10,15 @@
 </h:head>
 <h:body>
 
-	<div>Seleção Dígitho Brasil</div>
-	<ui:insert name="body" />
+	<h:form>
+		<p:menu>
+	       <p:menuitem value="Nova Solicitação" action="#{navegacaoController.novaSolicitacao()}" icon="ui-icon-star" ajax="false"/>
+	    </p:menu>
+	</h:form>
+	
+	
+	<h1><ui:insert name="titulo" /></h1>
+	<ui:insert name="conteudo" />
 
 </h:body>
 </html>
