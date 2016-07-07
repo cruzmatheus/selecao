@@ -16,13 +16,15 @@ public class Colaborador implements Serializable {
 	private String email;
 	private String telefone;
 	private DadosBancarios dadosBancarios;
+	private Equipe equipe;
 	
-	public Colaborador() {}
+	public Colaborador() {
+		this.equipe = EquipeFactory.equipe2;
+	}
 
 	public Colaborador(String nome, String cargo, String matricula,
 			Date dataNascimento, String rg, String cpf, String email,
 			String telefone, DadosBancarios dadosBancarios) {
-		super();
 		this.nome = nome;
 		this.cargo = cargo;
 		this.matricula = matricula;
@@ -32,12 +34,12 @@ public class Colaborador implements Serializable {
 		this.email = email;
 		this.telefone = telefone;
 		this.dadosBancarios = dadosBancarios;
+		this.equipe = EquipeFactory.equipe2;
 	}
 	
 	public Colaborador(String nome, String cargo, String matricula,
 			Date dataNascimento, String rg, String cpf, String email,
 			String telefone) {
-		super();
 		this.nome = nome;
 		this.cargo = cargo;
 		this.matricula = matricula;
@@ -46,6 +48,7 @@ public class Colaborador implements Serializable {
 		this.cpf = cpf;
 		this.email = email;
 		this.telefone = telefone;
+		this.equipe = EquipeFactory.equipe2;
 	}
 	
 	public String getNome() {
@@ -118,6 +121,14 @@ public class Colaborador implements Serializable {
 
 	public void setDadosBancarios(DadosBancarios dadosBancarios) {
 		this.dadosBancarios = dadosBancarios;
+	}
+
+	public Equipe getEquipe() {
+		return equipe;
+	}
+
+	public void setEquipe(Equipe equipe) {
+		this.equipe = equipe;
 	}
 
 	

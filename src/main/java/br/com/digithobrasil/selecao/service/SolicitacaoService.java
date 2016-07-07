@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 
+import br.com.digithobrasil.selecao.model.Equipe;
 import br.com.digithobrasil.selecao.model.Solicitacao;
 import br.com.digithobrasil.selecao.model.SolicitacaoRepositorio;
 
@@ -21,6 +22,10 @@ public class SolicitacaoService implements Serializable {
 	
 	public List<Solicitacao> buscarTodas() {
 		return solicitacaoRepositorio.buscarTodos();
+	}
+	
+	public List<Solicitacao> listarPorEquipe(Equipe equipe) {
+		return solicitacaoRepositorio.listarPorEquipe(equipe);
 	}
 	
 

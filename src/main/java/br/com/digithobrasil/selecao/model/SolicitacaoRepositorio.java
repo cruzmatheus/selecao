@@ -28,5 +28,16 @@ public class SolicitacaoRepositorio extends Repositorio<Solicitacao> implements 
 	public List<Solicitacao> buscarTodos() {
 		return new ArrayList<>(solicitacaoDb.values());
 	}
+	
+	public List<Solicitacao> listarPorEquipe(Equipe equipe) {
+		List<Solicitacao> retorno = new ArrayList<>();
+		for (Solicitacao solicitacao : solicitacaoDb.values()) {
+			if (solicitacao.getColaborador().getEquipe() == equipe) {
+				retorno.add(solicitacao);
+			}
+		}
+		
+		return retorno;
+	}
 
 }

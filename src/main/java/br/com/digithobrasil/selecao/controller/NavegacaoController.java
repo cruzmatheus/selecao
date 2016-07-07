@@ -8,15 +8,11 @@ import javax.inject.Named;
 @RequestScoped
 public class NavegacaoController {
 	
-	@Inject
-	private SolicitacaoController solicitacaoController;
-	
 	public String novaSolicitacao() {
 		return "/paginas/solicitacao/novo?faces-redirect=true";
 	}
 	
 	public String listaSolicitacoes() {
-		solicitacaoController.buscarTodas();
 		return "/paginas/solicitacao/lista?faces-redirect=true";
 	}
 

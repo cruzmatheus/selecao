@@ -16,11 +16,13 @@ import br.com.digithobrasil.selecao.model.Colaborador;
 import br.com.digithobrasil.selecao.model.Curso;
 import br.com.digithobrasil.selecao.model.Custo;
 import br.com.digithobrasil.selecao.model.DadosBancarios;
+import br.com.digithobrasil.selecao.model.Equipe;
 import br.com.digithobrasil.selecao.model.Hospedagem;
 import br.com.digithobrasil.selecao.model.Inscricao;
 import br.com.digithobrasil.selecao.model.Passagem;
 import br.com.digithobrasil.selecao.model.Solicitacao;
 import br.com.digithobrasil.selecao.model.Transporte;
+import br.com.digithobrasil.selecao.service.ColaboradorService;
 import br.com.digithobrasil.selecao.service.SolicitacaoService;
 import br.com.digithobrasil.selecao.util.FacesUtil;
 
@@ -41,10 +43,15 @@ public class SolicitacaoController implements Serializable {
 	@Inject
 	private SolicitacaoService solicitacaoService;
 	@Inject
+	private ColaboradorService colaboradorService;
+	@Inject
 	private NavegacaoController navegacaoController;
 	
 	private String tipoCusto;
 	private double valorCusto;
+	
+	private Equipe equipeColaboradorSelecionado;
+	private String matriculaColaborador;
 	
 	private List<Solicitacao> solicitacoes = new ArrayList<Solicitacao>();
 	
@@ -98,6 +105,11 @@ public class SolicitacaoController implements Serializable {
 	}
 	
 	public void handleKeyEvent() {
+	}
+	
+	public void onSelecionarColaborador() {
+		equipeColaboradorSelecionado = colaboradorService.buscarProMatricula(matriculaColaborador).getEquipe();
+		setSolicitacoes(solicitacaoService.listarPorEquipe(equipeColaboradorSelecionado));
 	}
 	
 	
@@ -170,6 +182,22 @@ public class SolicitacaoController implements Serializable {
 
 	public void setSolicitacoes(List<Solicitacao> solicitacoes) {
 		this.solicitacoes = solicitacoes;
+	}
+
+	public Equipe getEquipeColaboradorSelecionado() {
+		return equipeColaboradorSelecionado;
+	}
+
+	public void setEquipeColaboradorSelecionado(Equipe equipeColaboradorSelecionado) {
+		this.equipeColaboradorSelecionado = equipeColaboradorSelecionado;
+	}
+
+	public String getMatriculaColaborador() {
+		return matriculaColaborador;
+	}
+
+	public void setMatriculaColaborador(String matriculaColaborador) {
+		this.matriculaColaborador = matriculaColaborador;
 	}
 	
 	

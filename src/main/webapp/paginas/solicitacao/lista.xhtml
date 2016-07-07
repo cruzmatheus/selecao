@@ -10,9 +10,19 @@
 	
 	<ui:define name="conteudo">
 		<h:form id="frmLista" prependId="false">
+		
+		<p:outputLabel value="Colaborador" for="iColaborador" />
+		<p:selectOneMenu id="iColaborador" value="#{solicitacaoController.matriculaColaborador}">
+			<p:ajax listener="#{solicitacaoController.onSelecionarColaborador}" update="iEquipe, listaSolicitacoes"/>
+			<f:selectItem itemLabel="Selecione o tipo de custo" itemValue="" noSelectionOption="true" />
+			<f:selectItems value="#{colaboradorController.colaboradores}" var="c" itemLabel="#{c.nome}" itemValue="#{c.matricula}" />
+		</p:selectOneMenu>
+		
+		<p:outputLabel value="Equipe: " for="iEquipe" />
+		<p:outputLabel value="#{solicitacaoController.equipeColaboradorSelecionado.nome}" id="iEquipe" />
 			
 		<p:panel id="painelConsulta" styleClass="box_shadow">
-			<p:dataTable value="#{solicitacaoController.solicitacoes}" var="s" paginator="true" 
+			<p:dataTable id="listaSolicitacoes" widgetVar="listaSolicitacoes" value="#{solicitacaoController.solicitacoes}" var="s" paginator="true" 
 			rows="15" rowsPerPageTemplate="15,25,50" paginatorPosition="bottom"
 			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
 			currentPageReportTemplate=" {startRecord} de {endRecord} no total de {totalRecords} - Página: {currentPage}/{totalPages} "
