@@ -46,30 +46,48 @@
 					<h:outputText value="#{s.curso.cidade}"  />
 				</p:column>
 				
+				<p:column filterBy="#{s.situacao}" headerText="Situação da solicitação" width="2%">
+					<h:outputText value="#{s.situacao}"  />
+					<h:outputText value="Aberta" rendered="#{not solicitacaoController.isSolicitacaoEncerrada(s)}" />
+				</p:column>
+				
 				<p:column width="5%" style="text-align: center;">
-					<p:commandButton 
-						global="false"
-						icon="fa fa-close" title="Indeferir"
-						action="#{navegacaoController.encaminharIndefeirmento(s)}" 
-						rendered="#{not s.isColaboradorDecidiu(solicitacaoController.colaboradorSelecionado) and solicitacaoController.colaboradorSelecionado.matricula != s.colaborador.matricula}"/>
-						
 					<p:commandButton 
 						global="false"
 						icon="fa fa-check" title="Deferir"
 						action="#{solicitacaoController.deferirSolicitacao(s)}"
-						rendered="#{not s.isColaboradorDecidiu(solicitacaoController.colaboradorSelecionado) and solicitacaoController.colaboradorSelecionado.matricula != s.colaborador.matricula}"/>
+						rendered="#{solicitacaoController.isPermitidoDeferirIndeferir(s)}}"/>
+					
+					<p:commandButton 
+						global="false"
+						icon="fa fa-close" title="Indeferir"
+						action="#{navegacaoController.encaminharIndefeirmento(s)}" 
+						rendered="#{solicitacaoController.isPermitidoDeferirIndeferir(s)}"/>
 						
 					<p:commandButton 
 						global="false"
 						icon="fa fa-list" title="Deferir"
 						action="#{decisaoController.visualizarDecisoes(s)}"
-						rendered="#{solicitacaoController.colaboradorSelecionado.matricula == s.colaborador.matricula}"/>
+						rendered="#{solicitacaoController.isPermitidoVisualizarDecisoes(s)}"/>
 						
-						<p:commandButton 
+					<p:commandButton 
 						global="false"
 						icon="fa fa-gavel" title="Considerações"
 						action="#{navegacaoController.adicionarConsideracoes(s)}"
-						rendered="#{solicitacaoController.colaboradorSelecionado.equipe == s.colaborador.equipe.superiores}"/>
+						rendered="#{solicitacaoController.isPermitidoGerenciar(s)}"/>
+						
+					<p:commandButton 
+						global="false"
+						icon="fa fa-thumbs-up" title="Aprovar"
+						action="#{solicitacaoController.aprovarSolicitacao(s)}"
+						rendered="#{solicitacaoController.isPermitidoGerenciar(s)}"/>
+						
+					<p:commandButton 
+						global="false"
+						icon="fa fa-thumbs-down" title="Reprovar"
+						action="#{solicitacaoController.reprovarSolicitacao(s)}"
+						rendered="#{solicitacaoController.isPermitidoGerenciar(s)}"/>
+						
 						
 				</p:column>
 					

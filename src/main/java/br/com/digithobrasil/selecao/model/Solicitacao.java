@@ -19,6 +19,7 @@ public class Solicitacao extends SolicitacaoRepositorio implements Serializable 
 	private List<Custo> custos;
 	private String justificativa;
 	private float percentualSubsidio;
+	private String situacao;
 	private List<Decisao> decisoes = new ArrayList<Decisao>();
 	
 	public void preencherSolicitacao(Colaborador colaborador, Curso curso, List<Custo> custos) {
@@ -35,6 +36,11 @@ public class Solicitacao extends SolicitacaoRepositorio implements Serializable 
 		
 		return false;
 	}
+	
+	public void adicionarDecisao(Boolean deferida, String consideracoes, Colaborador colaborador) {
+		this.decisoes.add(new Decisao(deferida, consideracoes, colaborador));
+	}
+	
 	
 	public void adicionarCusto(List<Custo> custos) {
 		this.custos = custos;
@@ -94,6 +100,14 @@ public class Solicitacao extends SolicitacaoRepositorio implements Serializable 
 
 	public void setDecisoes(List<Decisao> decisoes) {
 		this.decisoes = decisoes;
+	}
+
+	public String getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(String situacao) {
+		this.situacao = situacao;
 	}
 
 	

@@ -120,7 +120,7 @@ public class SolicitacaoController implements Serializable {
 	
 	private void deferirIndeferirSolicitacao(Solicitacao solicitacao, Boolean deferir) {
 		try {
-			solicitacao.getDecisoes().add(new Decisao(deferir, consideracoes, colaboradorSelecionado));
+			solicitacao.adicionarDecisao(deferir, consideracoes, colaboradorSelecionado);
 			solicitacaoService.atualizar(solicitacao);
 			if (deferir == null) {
 				FacesUtil.addSucessMessage(String.format("Consideração cadastrada com sucesso"));
@@ -131,6 +131,27 @@ public class SolicitacaoController implements Serializable {
 			FacesUtil.addErrorMessage(String.format("Erro ao %d a solicitacao. Erro: %s", deferir ? "deferida" : "indeferida", e.getMessage()));
 		}
 	}
+	
+	public String aprovarSolicitacao(Solicitacao solicitacao) {
+		encerrarSolcitacao(solicitacao, "Aprovada");
+		return navegacaoController.listaSolicitacoes();		
+	}
+	
+	public String reprovarSolicitacao(Solicitacao solicitacao) {
+		encerrarSolcitacao(solicitacao, "Reprovada");
+		return navegacaoController.listaSolicitacoes();		
+	}
+	
+	public void encerrarSolcitacao(Solicitacao solicitacao, String situacao) {
+		try {
+			solicitacao.setSituacao(situacao);
+			solicitacaoService.atualizar(solicitacao);
+			FacesUtil.addSucessMessage(String.format("Solicitacao encerrada com sucesso"));
+		} catch (Exception e) {
+			FacesUtil.addErrorMessage(String.format("Erro ao encerrar a solicitacao. Erro: %s", e.getMessage()));
+		}
+	}
+	
 	
 	public void onChange() {
 		
@@ -143,6 +164,27 @@ public class SolicitacaoController implements Serializable {
 		colaboradorSelecionado = colaboradorService.buscarProMatricula(matriculaColaborador);
 		equipeColaboradorSelecionado = colaboradorSelecionado.getEquipe();
 		setSolicitacoes(solicitacaoService.listarPorEquipe(equipeColaboradorSelecionado));
+	}
+	
+	public boolean isPermitidoDeferirIndeferir(Solicitacao s) {
+		return  !s.isColaboradorDecidiu(colaboradorSelecionado) 
+				&& !colaboradorSelecionado.getMatricula().equals(solicitacao.getColaborador().getMatricula()) 
+				&& colaboradorSelecionado.getEquipe() != solicitacao.getColaborador().getEquipe().getSuperiores()
+				&& !isPermitidoGerenciar(s)
+				&& !isSolicitacaoEncerrada(s);
+	}
+	
+	public boolean isPermitidoVisualizarDecisoes(Solicitacao s) {
+		return colaboradorSelecionado.getMatricula() == solicitacao.getColaborador().getMatricula();
+	}
+	
+	public boolean isPermitidoGerenciar(Solicitacao s) {
+		return colaboradorSelecionado.getEquipe() == s.getColaborador().getEquipe().getSuperiores()
+				&& !isSolicitacaoEncerrada(s);
+	}
+	
+	public boolean isSolicitacaoEncerrada(Solicitacao s) {
+		return s.getSituacao() != null && !s.getSituacao().isEmpty();
 	}
 	
 	public CargoEnum[] getCargos() {
