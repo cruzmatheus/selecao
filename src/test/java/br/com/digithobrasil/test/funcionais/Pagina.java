@@ -15,7 +15,8 @@ public class Pagina {
 
 	@Before
 	public void setup() throws ClassNotFoundException, InterruptedException {
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Matheus\\Desktop\\chromedriver.exe");
+//		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Matheus\\Desktop\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.get("http://localhost:8080/selecao");
 	}
