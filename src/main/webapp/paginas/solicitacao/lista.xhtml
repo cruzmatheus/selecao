@@ -48,12 +48,20 @@
 					<p:commandButton 
 						global="false"
 						icon="fa fa-close" title="Indeferir"
-						action="#{navegacaoController.encaminharIndefeirmento(s)}" rendered="#{not s.isColaboradorDecidiu(solicitacaoController.colaboradorSelecionado)}"/>
+						action="#{navegacaoController.encaminharIndefeirmento(s)}" 
+						rendered="#{not s.isColaboradorDecidiu(solicitacaoController.colaboradorSelecionado) and solicitacaoController.colaboradorSelecionado.matricula != s.colaborador.matricula}"/>
 						
 					<p:commandButton 
 						global="false"
 						icon="fa fa-check" title="Deferir"
-						action="#{solicitacaoController.deferirSolicitacao(s)}" rendered="#{not s.isColaboradorDecidiu(solicitacaoController.colaboradorSelecionado)}"/>
+						action="#{solicitacaoController.deferirSolicitacao(s)}"
+						rendered="#{not s.isColaboradorDecidiu(solicitacaoController.colaboradorSelecionado) and solicitacaoController.colaboradorSelecionado.matricula != s.colaborador.matricula}"/>
+						
+					<p:commandButton 
+						global="false"
+						icon="fa fa-list" title="Deferir"
+						action="#{decisaoController.visualizarDecisoes(s)}"
+						rendered="#{solicitacaoController.colaboradorSelecionado.matricula == s.colaborador.matricula}"/>
 						
 				</p:column>
 					

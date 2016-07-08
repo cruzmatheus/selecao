@@ -136,7 +136,6 @@ public class SolicitacaoController implements Serializable {
 		setSolicitacoes(solicitacaoService.listarPorEquipe(equipeColaboradorSelecionado));
 	}
 	
-	
 	public CargoEnum[] getCargos() {
 		return CargoEnum.values();
 	}

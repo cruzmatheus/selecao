@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui"
+	template="/paginas/index.xhtml">
+	
+	<ui:define name="titulo">Solicitações</ui:define>
+	
+	<ui:define name="conteudo">
+		<p:panel id="painelDecisoes" styleClass="box_shadow">
+			<p:dataTable id="listaDecisoes" widgetVar="listaSolicitacoes" value="#{decisaoController.decisoes}" var="d" paginator="true" 
+			rows="15" rowsPerPageTemplate="15,25,50" paginatorPosition="bottom"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+			currentPageReportTemplate=" {startRecord} de {endRecord} no total de {totalRecords} - Página: {currentPage}/{totalPages} "
+			emptyMessage="Nenhum registro">
+			
+				<p:column headerText="Decisão" width="4%">
+					<h:outputText value="#{d.deferida}"  />
+				</p:column>
+				
+				<p:column headerText="Justificativa" width="4%">
+					<h:outputText value="#{d.justificativaIndeferimento}"  />
+				</p:column>
+				
+				<p:column headerText="Colaborador" width="10%">
+					<h:outputText value="#{d.colaborador.nome}"  />
+				</p:column>
+				
+			</p:dataTable>
+			
+			</p:panel>
+		
+	</ui:define>
+</ui:composition>

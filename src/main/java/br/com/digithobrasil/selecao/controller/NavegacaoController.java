@@ -27,4 +27,8 @@ public class NavegacaoController {
 		return "/paginas/solicitacao/indeferimento?faces-redirect=true";
 	}
 
+	public String listarDecisoes() {
+		return "/paginas/solicitacao/decisoes?faces-redirect=true";
+	}
+
 }
