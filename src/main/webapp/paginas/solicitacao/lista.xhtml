@@ -44,6 +44,23 @@
 					<h:outputText value="#{s.curso.cidade}"  />
 				</p:column>
 				
+				<p:column width="5%" style="text-align: center;">
+					<p:commandButton 
+						global="false"
+						icon="fa fa-close" title="Indeferir"
+						action="#{navegacaoController.encaminharIndefeirmento(s)}" rendered="#{empty s.deferida}"/>
+						
+					<p:commandButton 
+						global="false"
+						icon="fa fa-check" title="Deferir"
+						action="#{solicitacaoController.deferirSolicitacao(s)}" rendered="#{empty s.deferida}"/>
+						
+					<h:outputText value="Deferido" rendered="#{s.deferida}" />
+					<h:outputText value="Indeferido" rendered="#{not s.deferida.booleanValue() and not empty s.deferida}" />
+				</p:column>
+					
+				
+				
 			</p:dataTable>
 			
 			</p:panel>

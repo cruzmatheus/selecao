@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui"
+	template="/paginas/index.xhtml">
+	
+	<ui:define name="titulo">Solicitações</ui:define>
+	
+	<ui:define name="conteudo">
+		<h:form id="formIndeferimento" prependId="false">
+		
+		<p:outputLabel value="Justificativa" for="iJustificativa" />
+		<p:inputText id="iJustificativa" value="#{solicitacaoController.solicitacao.justificativaIndeferimento}"/>
+		
+		<p:commandButton id="efetuar_indeferimento" value="Indeferir" action="#{solicitacaoController.indeferirSolicitacao()}" ajax="false" style="margin-top: 20px;" />
+		
+		</h:form>
+		
+	</ui:define>
+</ui:composition>

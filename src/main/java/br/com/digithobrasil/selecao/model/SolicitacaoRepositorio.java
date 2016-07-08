@@ -21,7 +21,15 @@ public class SolicitacaoRepositorio extends Repositorio<Solicitacao> implements 
 
 	@Override
 	public void salvar(Solicitacao solicitacao) {
-		solicitacaoDb.put(proximoId(), solicitacao);
+		Integer id = proximoId();
+		solicitacao.setId(id);
+		solicitacaoDb.put(id, solicitacao);
+	}
+	
+	@Override
+	public void atualizar(Solicitacao solicitacao) {
+		solicitacaoDb.remove(solicitacao.getId());
+		solicitacaoDb.put(solicitacao.getId(), solicitacao);
 	}
 
 	@Override

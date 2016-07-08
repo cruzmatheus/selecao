@@ -62,6 +62,7 @@ public class SolicitacaoController implements Serializable {
 			solicitacao.preencherSolicitacao(colaborador, curso, custos);
 			solicitacaoService.salvar(solicitacao);
 			FacesUtil.addSucessMessage("Solicitação cadastrada com sucesso");
+			solicitacao = new Solicitacao();
 		} catch (Exception e) {
 			FacesUtil.addErrorMessage(String.format("Erro ao cadastrara a solicitacao. Erro: %s", e.getMessage()));
 		}
@@ -98,6 +99,26 @@ public class SolicitacaoController implements Serializable {
 		custo.setValor(valorCusto);
 		custos.add(custo);
 		custo.getTipoCusto();
+	}
+	
+	public String indeferirSolicitacao() {
+		deferirIndeferirSolicitacao(solicitacao, false);
+		return navegacaoController.listaSolicitacoes();
+	}
+	
+	public String deferirSolicitacao(Solicitacao solicitacao) {
+		deferirIndeferirSolicitacao(solicitacao, true);
+		return navegacaoController.listaSolicitacoes();
+	}
+	
+	private void deferirIndeferirSolicitacao(Solicitacao solicitacao, boolean deferir) {
+		try {
+			solicitacao.setDeferida(deferir);
+			solicitacaoService.atualizar(solicitacao);
+			FacesUtil.addSucessMessage(String.format("Solicitação %s com sucesso", deferir ? "deferida" : "indeferida"));
+		} catch (Exception e) {
+			FacesUtil.addErrorMessage(String.format("Erro ao %d a solicitacao. Erro: %s", deferir ? "deferida" : "indeferida", e.getMessage()));
+		}
 	}
 	
 	public void onChange() {

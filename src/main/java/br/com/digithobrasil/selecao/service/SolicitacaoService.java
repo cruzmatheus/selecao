@@ -20,6 +20,10 @@ public class SolicitacaoService implements Serializable {
 		solicitacaoRepositorio.salvar(solicitacao);
 	}
 	
+	public void atualizar(Solicitacao solicitacao) {
+		solicitacaoRepositorio.atualizar(solicitacao);
+	}
+	
 	public List<Solicitacao> buscarTodas() {
 		return solicitacaoRepositorio.buscarTodos();
 	}

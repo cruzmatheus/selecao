@@ -13,11 +13,14 @@ public class Solicitacao extends SolicitacaoRepositorio implements Serializable 
 
 	private static final long serialVersionUID = 7294175903002652142L;
 	
+	private Integer id;
 	private Colaborador colaborador;
 	private Curso curso;
 	private List<Custo> custos;
 	private String justificativa;
 	private float percentualSubsidio;
+	private Boolean deferida;
+	private String justificativaIndeferimento;
 	
 	public void preencherSolicitacao(Colaborador colaborador, Curso curso, List<Custo> custos) {
 		this.colaborador = colaborador;
@@ -67,6 +70,34 @@ public class Solicitacao extends SolicitacaoRepositorio implements Serializable 
 
 	public void setCustos(List<Custo> custos) {
 		this.custos = custos;
+	}
+
+	public Boolean isDeferida() {
+		return deferida;
+	}
+
+	public void setDeferida(Boolean deferida) {
+		this.deferida = deferida;
+	}
+
+	public String getJustificativaIndeferimento() {
+		return justificativaIndeferimento;
+	}
+
+	public void setJustificativaIndeferimento(String justificativaIndeferimento) {
+		this.justificativaIndeferimento = justificativaIndeferimento;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Boolean getDeferida() {
+		return deferida;
 	}
 
 	

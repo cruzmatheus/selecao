@@ -4,9 +4,14 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.digithobrasil.selecao.model.Solicitacao;
+
 @Named
 @RequestScoped
 public class NavegacaoController {
+	
+	@Inject
+	private SolicitacaoController solicitacaoController;
 	
 	public String novaSolicitacao() {
 		return "/paginas/solicitacao/novo?faces-redirect=true";
@@ -14,6 +19,11 @@ public class NavegacaoController {
 	
 	public String listaSolicitacoes() {
 		return "/paginas/solicitacao/lista?faces-redirect=true";
+	}
+	
+	public String encaminharIndefeirmento(Solicitacao solicitacao) {
+		solicitacaoController.setSolicitacao(solicitacao);
+		return "/paginas/solicitacao/indeferimento?faces-redirect=true";
 	}
 
 }

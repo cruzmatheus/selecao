@@ -16,5 +16,7 @@ public abstract class Repositorio<E> implements Serializable {
 	abstract List<E> buscarTodos();
 
 	abstract void salvar(E e);
+	
+	abstract void atualizar(E e);
 
 }

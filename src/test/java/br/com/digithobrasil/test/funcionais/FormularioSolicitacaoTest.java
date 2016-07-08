@@ -39,7 +39,7 @@ public class FormularioSolicitacaoTest extends Pagina {
 		preencherCampo("iAgencia", "1234");
 		preencherCampo("iContaCorrente", "532463-2");
 		
-		preencherCampo("iTituloCurso", "Programação orientada à objetos");
+		preencherCampo("iTituloCurso", "Programacao orientada a objetos");
 		
 		driver.findElement(By.id("iDataCurso")).click();
 		esperarBotaoPorNome("Prev", 10).click();
@@ -54,7 +54,7 @@ public class FormularioSolicitacaoTest extends Pagina {
 		
 		click("adicionar_custo");
 		
-		preencherCampo("iJustificativa", "Aprender acerca da programação orientada à objetos");
+		preencherCampo("iJustificativa", "Aprender acerca da programacao orientada a objetos");
 		
 		esperarBotaoPorId("efetuar_solicitacao", 10).click();
 		
