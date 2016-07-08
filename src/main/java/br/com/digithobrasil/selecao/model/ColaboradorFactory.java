@@ -10,7 +10,7 @@ import org.jfairy.producer.person.Person;
 public class ColaboradorFactory {
 	
 	private static Fairy fairy = Fairy.create();
-	public static List<Colaborador> colaboradores = new ArrayList<>();
+	private static List<Colaborador> colaboradores = new ArrayList<>();
 	
 	static {
 		for (int i = 0; i < 9; i++) {
@@ -27,6 +27,15 @@ public class ColaboradorFactory {
 			}
 			
 		}
+	}
+	
+	public static List<Colaborador> getColaboradores() {
+		List<Colaborador> retorno = new ArrayList<Colaborador>();
+		for (Colaborador colaborador : colaboradores) {
+			retorno.add(colaborador);
+		}
+		
+		return retorno;
 	}
 
 }

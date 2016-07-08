@@ -29,7 +29,7 @@ public class ColaboradorController implements Serializable {
 	@PostConstruct
 	public void preencherColaboradores() {
 		List<Colaborador> colaboradores = new ArrayList<>();
-		colaboradores.addAll(ColaboradorFactory.colaboradores);
+		colaboradores.addAll(ColaboradorFactory.getColaboradores());
 		colaboradores.addAll(colaboradorService.buscarTodos());
 		
 		setColaboradores(colaboradores);

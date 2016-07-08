@@ -16,8 +16,8 @@ public class ColaboradorService implements Serializable {
 	@EJB
 	ColaboradorRepositorio colaboradorRepositorio;
 
-	public Colaborador buscarProMatricula(String matricula) {
-		List<Colaborador> colaboradores = ColaboradorFactory.colaboradores;
+	public Colaborador buscarPorMatricula(String matricula) {
+		List<Colaborador> colaboradores = ColaboradorFactory.getColaboradores();
 		colaboradores.addAll(buscarTodos());
 		
 		for (Colaborador colaborador : colaboradores) {

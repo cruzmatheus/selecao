@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui"
+	template="/paginas/index.xhtml">
+	
+	<ui:define name="titulo">Solicitações</ui:define>
+	
+	<ui:define name="conteudo">
+		<h:form id="formEncerrar" prependId="false">
+		
+		<p:outputLabel value="Percentual subsídio" for="iPercentualSubsidio" />
+		<p:inputText id="iPercentualSubsidio" value="#{solicitacaoController.solicitacao.percentualSubsidio}"/>
+		
+		<p:commandButton id="efetuar_encerramento" value="Confirmar" action="#{solicitacaoController.encerrarSolcitacao()}" ajax="false" style="margin-top: 20px;" />
+		
+		</h:form>
+		
+	</ui:define>
+</ui:composition>

@@ -16,7 +16,6 @@ import br.com.digithobrasil.selecao.model.Colaborador;
 import br.com.digithobrasil.selecao.model.Curso;
 import br.com.digithobrasil.selecao.model.Custo;
 import br.com.digithobrasil.selecao.model.DadosBancarios;
-import br.com.digithobrasil.selecao.model.Decisao;
 import br.com.digithobrasil.selecao.model.Equipe;
 import br.com.digithobrasil.selecao.model.Hospedagem;
 import br.com.digithobrasil.selecao.model.Inscricao;
@@ -55,6 +54,7 @@ public class SolicitacaoController implements Serializable {
 	private Equipe equipeColaboradorSelecionado;
 	private String matriculaColaborador;
 	private String consideracoes;
+	private String situacaoSelecionada;
 	
 	private List<Solicitacao> solicitacoes = new ArrayList<Solicitacao>();
 	
@@ -132,24 +132,17 @@ public class SolicitacaoController implements Serializable {
 		}
 	}
 	
-	public String aprovarSolicitacao(Solicitacao solicitacao) {
-		encerrarSolcitacao(solicitacao, "Aprovada");
-		return navegacaoController.listaSolicitacoes();		
-	}
 	
-	public String reprovarSolicitacao(Solicitacao solicitacao) {
-		encerrarSolcitacao(solicitacao, "Reprovada");
-		return navegacaoController.listaSolicitacoes();		
-	}
-	
-	public void encerrarSolcitacao(Solicitacao solicitacao, String situacao) {
+	public String encerrarSolcitacao() {
 		try {
-			solicitacao.setSituacao(situacao);
+			solicitacao.setSituacao(situacaoSelecionada);
 			solicitacaoService.atualizar(solicitacao);
 			FacesUtil.addSucessMessage(String.format("Solicitacao encerrada com sucesso"));
 		} catch (Exception e) {
 			FacesUtil.addErrorMessage(String.format("Erro ao encerrar a solicitacao. Erro: %s", e.getMessage()));
 		}
+		
+		return navegacaoController.listaSolicitacoes();
 	}
 	
 	
@@ -161,21 +154,26 @@ public class SolicitacaoController implements Serializable {
 	}
 	
 	public void onSelecionarColaborador() {
-		colaboradorSelecionado = colaboradorService.buscarProMatricula(matriculaColaborador);
+		colaboradorSelecionado = colaboradorService.buscarPorMatricula(matriculaColaborador);
 		equipeColaboradorSelecionado = colaboradorSelecionado.getEquipe();
 		setSolicitacoes(solicitacaoService.listarPorEquipe(equipeColaboradorSelecionado));
 	}
 	
+	public void selecionarSituacao(String situacao) {
+		this.situacaoSelecionada = situacao;
+	}
+	
 	public boolean isPermitidoDeferirIndeferir(Solicitacao s) {
-		return  !s.isColaboradorDecidiu(colaboradorSelecionado) 
-				&& !colaboradorSelecionado.getMatricula().equals(solicitacao.getColaborador().getMatricula()) 
-				&& colaboradorSelecionado.getEquipe() != solicitacao.getColaborador().getEquipe().getSuperiores()
+		return  s != null
+				&& !s.isColaboradorDecidiu(colaboradorSelecionado) 
+				&& !colaboradorSelecionado.getMatricula().equals(s.getColaborador().getMatricula()) 
+				&& colaboradorSelecionado.getEquipe() != s.getColaborador().getEquipe().getSuperiores()
 				&& !isPermitidoGerenciar(s)
 				&& !isSolicitacaoEncerrada(s);
 	}
 	
 	public boolean isPermitidoVisualizarDecisoes(Solicitacao s) {
-		return colaboradorSelecionado.getMatricula() == solicitacao.getColaborador().getMatricula();
+		return colaboradorSelecionado.getMatricula() == s.getColaborador().getMatricula();
 	}
 	
 	public boolean isPermitidoGerenciar(Solicitacao s) {
@@ -288,6 +286,14 @@ public class SolicitacaoController implements Serializable {
 
 	public void setConsideracoes(String consideracoes) {
 		this.consideracoes = consideracoes;
+	}
+
+	public String getSituacaoSelecionada() {
+		return situacaoSelecionada;
+	}
+
+	public void setSituacaoSelecionada(String situacaoSelecionada) {
+		this.situacaoSelecionada = situacaoSelecionada;
 	}
 	
 	

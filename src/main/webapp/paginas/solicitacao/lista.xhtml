@@ -56,7 +56,7 @@
 						global="false"
 						icon="fa fa-check" title="Deferir"
 						action="#{solicitacaoController.deferirSolicitacao(s)}"
-						rendered="#{solicitacaoController.isPermitidoDeferirIndeferir(s)}}"/>
+						rendered="#{solicitacaoController.isPermitidoDeferirIndeferir(s)}"/>
 					
 					<p:commandButton 
 						global="false"
@@ -79,13 +79,14 @@
 					<p:commandButton 
 						global="false"
 						icon="fa fa-thumbs-up" title="Aprovar"
-						action="#{solicitacaoController.aprovarSolicitacao(s)}"
+						action="#{navegacaoController.encerrarSolicitacao(s)}"
+						actionListener="#{solicitacaoController.selecionarSituacao('Aprovada')}"
 						rendered="#{solicitacaoController.isPermitidoGerenciar(s)}"/>
 						
 					<p:commandButton 
 						global="false"
 						icon="fa fa-thumbs-down" title="Reprovar"
-						action="#{solicitacaoController.reprovarSolicitacao(s)}"
+						action="#{solicitacaoController.selecionarSituacao('Reprovada')}"
 						rendered="#{solicitacaoController.isPermitidoGerenciar(s)}"/>
 						
 						

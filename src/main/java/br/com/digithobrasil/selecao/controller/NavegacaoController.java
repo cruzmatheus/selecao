@@ -31,6 +31,11 @@ public class NavegacaoController {
 		solicitacaoController.setSolicitacao(solicitacao);
 		return "/paginas/solicitacao/adicionar_consideracao?faces-redirect=true";
 	}
+	
+	public String encerrarSolicitacao(Solicitacao solicitacao) {
+		solicitacaoController.setSolicitacao(solicitacao);
+		return "/paginas/solicitacao/encerrar?faces-redirect=true";
+	}
 
 	public String listarDecisoes() {
 		return "/paginas/solicitacao/decisoes?faces-redirect=true";

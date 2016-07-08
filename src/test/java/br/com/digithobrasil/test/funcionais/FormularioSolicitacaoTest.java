@@ -1,12 +1,16 @@
 package br.com.digithobrasil.test.funcionais;
 
+import static org.junit.Assert.assertTrue;
+
+import org.jfairy.Fairy;
+import org.jfairy.producer.person.Person;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import static org.junit.Assert.*;
-
 public class FormularioSolicitacaoTest extends Pagina {
+	
+	private Fairy fairy = Fairy.create();
 
 	public void novaSolicitacao() {
 		WebElement novaSolicitacaoBtn = driver.findElement(By.id("nova_solicitacao"));
@@ -22,8 +26,9 @@ public class FormularioSolicitacaoTest extends Pagina {
 	
 	@Test
 	public void testCadastrarSolicitacao() throws InterruptedException {
+		Person person = fairy.person();
 		novaSolicitacao();
-		preencherCampo("iNomeColaborador", "Matheus");
+		preencherCampo("iNomeColaborador", person.firstName() + " " + person.lastName());
 		selectOne("iCargoColaborador", "Desenvolvedor");
 		preencherCampo("iMatriculaColaborador", "3213");
 		
@@ -31,9 +36,9 @@ public class FormularioSolicitacaoTest extends Pagina {
 		esperarBotaoPorNome("Prev", 10).click();
 		driver.findElement(By.linkText("28")).click();
 		
-		preencherCampo("iRgColaborador", "332112224");
+		preencherCampo("iRgColaborador", person.nationalIdentificationNumber());
 		preencherCampo("iCpfColaborador", "003.442.233-78");
-		preencherCampo("iEmailColaborador", "matheus@gmail.com");
+		preencherCampo("iEmailColaborador", person.email());
 		
 		preencherCampo("iBanco", "033");
 		preencherCampo("iAgencia", "1234");
