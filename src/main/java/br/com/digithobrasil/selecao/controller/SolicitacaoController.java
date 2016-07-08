@@ -16,6 +16,7 @@ import br.com.digithobrasil.selecao.model.Colaborador;
 import br.com.digithobrasil.selecao.model.Curso;
 import br.com.digithobrasil.selecao.model.Custo;
 import br.com.digithobrasil.selecao.model.DadosBancarios;
+import br.com.digithobrasil.selecao.model.Decisao;
 import br.com.digithobrasil.selecao.model.Equipe;
 import br.com.digithobrasil.selecao.model.Hospedagem;
 import br.com.digithobrasil.selecao.model.Inscricao;
@@ -50,8 +51,10 @@ public class SolicitacaoController implements Serializable {
 	private String tipoCusto;
 	private double valorCusto;
 	
+	private Colaborador colaboradorSelecionado;
 	private Equipe equipeColaboradorSelecionado;
 	private String matriculaColaborador;
+	private String justificativaIndeferimento;
 	
 	private List<Solicitacao> solicitacoes = new ArrayList<Solicitacao>();
 	
@@ -62,7 +65,6 @@ public class SolicitacaoController implements Serializable {
 			solicitacao.preencherSolicitacao(colaborador, curso, custos);
 			solicitacaoService.salvar(solicitacao);
 			FacesUtil.addSucessMessage("Solicitação cadastrada com sucesso");
-			solicitacao = new Solicitacao();
 		} catch (Exception e) {
 			FacesUtil.addErrorMessage(String.format("Erro ao cadastrara a solicitacao. Erro: %s", e.getMessage()));
 		}
@@ -113,7 +115,7 @@ public class SolicitacaoController implements Serializable {
 	
 	private void deferirIndeferirSolicitacao(Solicitacao solicitacao, boolean deferir) {
 		try {
-			solicitacao.setDeferida(deferir);
+			solicitacao.getDecisoes().add(new Decisao(deferir, justificativaIndeferimento, colaboradorSelecionado));
 			solicitacaoService.atualizar(solicitacao);
 			FacesUtil.addSucessMessage(String.format("Solicitação %s com sucesso", deferir ? "deferida" : "indeferida"));
 		} catch (Exception e) {
@@ -129,7 +131,8 @@ public class SolicitacaoController implements Serializable {
 	}
 	
 	public void onSelecionarColaborador() {
-		equipeColaboradorSelecionado = colaboradorService.buscarProMatricula(matriculaColaborador).getEquipe();
+		colaboradorSelecionado = colaboradorService.buscarProMatricula(matriculaColaborador);
+		equipeColaboradorSelecionado = colaboradorSelecionado.getEquipe();
 		setSolicitacoes(solicitacaoService.listarPorEquipe(equipeColaboradorSelecionado));
 	}
 	
@@ -219,6 +222,22 @@ public class SolicitacaoController implements Serializable {
 
 	public void setMatriculaColaborador(String matriculaColaborador) {
 		this.matriculaColaborador = matriculaColaborador;
+	}
+
+	public String getJustificativaIndeferimento() {
+		return justificativaIndeferimento;
+	}
+
+	public void setJustificativaIndeferimento(String justificativaIndeferimento) {
+		this.justificativaIndeferimento = justificativaIndeferimento;
+	}
+
+	public Colaborador getColaboradorSelecionado() {
+		return colaboradorSelecionado;
+	}
+
+	public void setColaboradorSelecionado(Colaborador colaboradorSelecionado) {
+		this.colaboradorSelecionado = colaboradorSelecionado;
 	}
 	
 	

@@ -19,13 +19,21 @@ public class Solicitacao extends SolicitacaoRepositorio implements Serializable 
 	private List<Custo> custos;
 	private String justificativa;
 	private float percentualSubsidio;
-	private Boolean deferida;
-	private String justificativaIndeferimento;
+	private List<Decisao> decisoes = new ArrayList<Decisao>();
 	
 	public void preencherSolicitacao(Colaborador colaborador, Curso curso, List<Custo> custos) {
 		this.colaborador = colaborador;
 		this.curso = curso;
 		this.adicionarCusto(custos);
+	}
+	
+	public boolean isColaboradorDecidiu(Colaborador colaborador) {
+		for (Decisao decisao : decisoes) {
+			if (decisao.getColaborador() == colaborador)
+				return true;
+		}
+		
+		return false;
 	}
 	
 	public void adicionarCusto(List<Custo> custos) {
@@ -72,22 +80,6 @@ public class Solicitacao extends SolicitacaoRepositorio implements Serializable 
 		this.custos = custos;
 	}
 
-	public Boolean isDeferida() {
-		return deferida;
-	}
-
-	public void setDeferida(Boolean deferida) {
-		this.deferida = deferida;
-	}
-
-	public String getJustificativaIndeferimento() {
-		return justificativaIndeferimento;
-	}
-
-	public void setJustificativaIndeferimento(String justificativaIndeferimento) {
-		this.justificativaIndeferimento = justificativaIndeferimento;
-	}
-
 	public Integer getId() {
 		return id;
 	}
@@ -96,8 +88,12 @@ public class Solicitacao extends SolicitacaoRepositorio implements Serializable 
 		this.id = id;
 	}
 
-	public Boolean getDeferida() {
-		return deferida;
+	public List<Decisao> getDecisoes() {
+		return decisoes;
+	}
+
+	public void setDecisoes(List<Decisao> decisoes) {
+		this.decisoes = decisoes;
 	}
 
 	

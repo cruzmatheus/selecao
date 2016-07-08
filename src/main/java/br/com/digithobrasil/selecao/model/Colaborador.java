@@ -7,6 +7,7 @@ public class Colaborador implements Serializable {
 	
 	private static final long serialVersionUID = 6510214439391054492L;
 	
+	private Integer id;
 	private String nome;
 	private String cargo;
 	private String matricula;
@@ -129,6 +130,14 @@ public class Colaborador implements Serializable {
 
 	public void setEquipe(Equipe equipe) {
 		this.equipe = equipe;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	

@@ -12,7 +12,7 @@
 		<h:form id="formIndeferimento" prependId="false">
 		
 		<p:outputLabel value="Justificativa" for="iJustificativa" />
-		<p:inputText id="iJustificativa" value="#{solicitacaoController.solicitacao.justificativaIndeferimento}"/>
+		<p:inputText id="iJustificativa" value="#{solicitacaoController.justificativaIndeferimento}"/>
 		
 		<p:commandButton id="efetuar_indeferimento" value="Indeferir" action="#{solicitacaoController.indeferirSolicitacao()}" ajax="false" style="margin-top: 20px;" />
 		

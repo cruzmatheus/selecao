@@ -48,15 +48,13 @@
 					<p:commandButton 
 						global="false"
 						icon="fa fa-close" title="Indeferir"
-						action="#{navegacaoController.encaminharIndefeirmento(s)}" rendered="#{empty s.deferida}"/>
+						action="#{navegacaoController.encaminharIndefeirmento(s)}" rendered="#{not s.isColaboradorDecidiu(solicitacaoController.colaboradorSelecionado)}"/>
 						
 					<p:commandButton 
 						global="false"
 						icon="fa fa-check" title="Deferir"
-						action="#{solicitacaoController.deferirSolicitacao(s)}" rendered="#{empty s.deferida}"/>
+						action="#{solicitacaoController.deferirSolicitacao(s)}" rendered="#{not s.isColaboradorDecidiu(solicitacaoController.colaboradorSelecionado)}"/>
 						
-					<h:outputText value="Deferido" rendered="#{s.deferida}" />
-					<h:outputText value="Indeferido" rendered="#{not s.deferida.booleanValue() and not empty s.deferida}" />
 				</p:column>
 					
 				

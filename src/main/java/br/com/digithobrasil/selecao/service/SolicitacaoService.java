@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 
+import br.com.digithobrasil.selecao.model.ColaboradorRepositorio;
 import br.com.digithobrasil.selecao.model.Equipe;
 import br.com.digithobrasil.selecao.model.Solicitacao;
 import br.com.digithobrasil.selecao.model.SolicitacaoRepositorio;
@@ -16,7 +17,11 @@ public class SolicitacaoService implements Serializable {
 	@EJB
 	SolicitacaoRepositorio solicitacaoRepositorio;
 	
+	@EJB
+	ColaboradorRepositorio colaboradorRepositorio;
+	
 	public void salvar(Solicitacao solicitacao) {
+		colaboradorRepositorio.salvar(solicitacao.getColaborador());
 		solicitacaoRepositorio.salvar(solicitacao);
 	}
 	

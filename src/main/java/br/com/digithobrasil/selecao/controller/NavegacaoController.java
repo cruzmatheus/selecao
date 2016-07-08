@@ -14,6 +14,7 @@ public class NavegacaoController {
 	private SolicitacaoController solicitacaoController;
 	
 	public String novaSolicitacao() {
+		solicitacaoController.setSolicitacao(new Solicitacao());
 		return "/paginas/solicitacao/novo?faces-redirect=true";
 	}
 	
