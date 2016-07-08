@@ -9,12 +9,12 @@
 	<ui:define name="titulo">Solicitações</ui:define>
 	
 	<ui:define name="conteudo">
-		<h:form id="formIndeferimento" prependId="false">
+		<h:form id="formConsideracao" prependId="false">
 		
-		<p:outputLabel value="Justificativa" for="iJustificativa" />
-		<p:inputText id="iJustificativa" value="#{solicitacaoController.consideracoes}"/>
+		<p:outputLabel value="Consideracoes" for="iConsideracoes" />
+		<p:inputText id="iConsideracoes" value="#{solicitacaoController.consideracoes}"/>
 		
-		<p:commandButton id="efetuar_indeferimento" value="Indeferir" action="#{solicitacaoController.indeferirSolicitacao()}" ajax="false" style="margin-top: 20px;" />
+		<p:commandButton id="efetuar_consideracao" value="Adicionar consideracao" action="#{solicitacaoController.adicionarConsideracao()}" ajax="false" style="margin-top: 20px;" />
 		
 		</h:form>
 		

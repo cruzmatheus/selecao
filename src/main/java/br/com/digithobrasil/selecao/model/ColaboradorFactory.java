@@ -15,7 +15,7 @@ public class ColaboradorFactory {
 	static {
 		for (int i = 0; i < 9; i++) {
 			Person person = fairy.person();
-			Colaborador colaborador = new Colaborador(person.firstName(), "Desenvolvedor", i+"",new Date(person.dateOfBirth().getMillis()), person.nationalIdentificationNumber(), person.nationalIdentificationNumber(), person.email(), person.telephoneNumber());
+			Colaborador colaborador = new Colaborador(person.firstName() + " " + person.lastName(), "Desenvolvedor", i+"",new Date(person.dateOfBirth().getMillis()), person.nationalIdentificationNumber(), person.nationalIdentificationNumber(), person.email(), person.telephoneNumber());
 			colaboradores.add(colaborador);
 			
 			if (i <= 2) {

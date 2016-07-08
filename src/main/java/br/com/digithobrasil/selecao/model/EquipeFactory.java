@@ -10,9 +10,9 @@ public class EquipeFactory {
 	public static Equipe equipe3;
 	
 	static {
-		equipe1 = new Equipe("Equipe 1");
-		equipe2 = new Equipe("Equipe 2", equipe1);
-		equipe3 = new Equipe("Equipe 3", equipe1);
+		equipe1 = new Equipe("Diretores");
+		equipe2 = new Equipe("Equipe Projeto 1", equipe1);
+		equipe3 = new Equipe("Equipe Projeto 2", equipe1);
 	}
 	
 	public static List<Equipe> equipes() {

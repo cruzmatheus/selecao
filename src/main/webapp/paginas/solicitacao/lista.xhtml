@@ -11,17 +11,19 @@
 	<ui:define name="conteudo">
 		<h:form id="frmLista" prependId="false">
 		
-		<p:outputLabel value="Colaborador" for="iColaborador" />
-		<p:selectOneMenu id="iColaborador" value="#{solicitacaoController.matriculaColaborador}">
-			<p:ajax listener="#{solicitacaoController.onSelecionarColaborador}" update="iEquipe, listaSolicitacoes"/>
-			<f:selectItem itemLabel="Selecione o tipo de custo" itemValue="" noSelectionOption="true" />
-			<f:selectItems value="#{colaboradorController.colaboradores}" var="c" itemLabel="#{c.nome}" itemValue="#{c.matricula}" />
-		</p:selectOneMenu>
-		
-		<p:outputLabel value="Equipe: " for="iEquipe" />
-		<p:outputLabel value="#{solicitacaoController.equipeColaboradorSelecionado.nome}" id="iEquipe" />
+		<h:panelGrid columns="2">
+			<p:outputLabel value="Colaborador: " for="iColaborador" />
+			<p:selectOneMenu id="iColaborador" value="#{solicitacaoController.matriculaColaborador}">
+				<p:ajax listener="#{solicitacaoController.onSelecionarColaborador}" update="iEquipe, listaSolicitacoes"/>
+				<f:selectItem itemLabel="Selecione o tipo de custo" itemValue="" noSelectionOption="true" />
+				<f:selectItems value="#{colaboradorController.colaboradores}" var="c" itemLabel="#{c.nome} - #{c.equipe.nome}" itemValue="#{c.matricula}" />
+			</p:selectOneMenu>
 			
-		<p:panel id="painelConsulta" styleClass="box_shadow">
+			<p:outputLabel value="Equipe: " for="iEquipe" />
+			<p:outputLabel value="#{solicitacaoController.equipeColaboradorSelecionado.nome}" id="iEquipe" />
+		</h:panelGrid>
+			
+		<p:panel id="painelConsulta" style="margin-top: 20px;">
 			<p:dataTable id="listaSolicitacoes" widgetVar="listaSolicitacoes" value="#{solicitacaoController.solicitacoes}" var="s" paginator="true" 
 			rows="15" rowsPerPageTemplate="15,25,50" paginatorPosition="bottom"
 			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
@@ -62,6 +64,12 @@
 						icon="fa fa-list" title="Deferir"
 						action="#{decisaoController.visualizarDecisoes(s)}"
 						rendered="#{solicitacaoController.colaboradorSelecionado.matricula == s.colaborador.matricula}"/>
+						
+						<p:commandButton 
+						global="false"
+						icon="fa fa-gavel" title="Considerações"
+						action="#{navegacaoController.adicionarConsideracoes(s)}"
+						rendered="#{solicitacaoController.colaboradorSelecionado.equipe == s.colaborador.equipe.superiores}"/>
 						
 				</p:column>
 					

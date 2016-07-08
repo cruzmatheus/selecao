@@ -40,7 +40,7 @@ public class SolicitacaoRepositorio extends Repositorio<Solicitacao> implements 
 	public List<Solicitacao> listarPorEquipe(Equipe equipe) {
 		List<Solicitacao> retorno = new ArrayList<>();
 		for (Solicitacao solicitacao : solicitacaoDb.values()) {
-			if (solicitacao.getColaborador().getEquipe() == equipe) {
+			if (solicitacao.getColaborador().getEquipe() == equipe || solicitacao.getColaborador().getEquipe().getSuperiores() == equipe) {
 				retorno.add(solicitacao);
 			}
 		}

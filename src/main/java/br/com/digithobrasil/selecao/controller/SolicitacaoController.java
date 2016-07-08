@@ -54,7 +54,7 @@ public class SolicitacaoController implements Serializable {
 	private Colaborador colaboradorSelecionado;
 	private Equipe equipeColaboradorSelecionado;
 	private String matriculaColaborador;
-	private String justificativaIndeferimento;
+	private String consideracoes;
 	
 	private List<Solicitacao> solicitacoes = new ArrayList<Solicitacao>();
 	
@@ -113,11 +113,20 @@ public class SolicitacaoController implements Serializable {
 		return navegacaoController.listaSolicitacoes();
 	}
 	
-	private void deferirIndeferirSolicitacao(Solicitacao solicitacao, boolean deferir) {
+	public String adicionarConsideracao() {
+		deferirIndeferirSolicitacao(solicitacao, null);
+		return navegacaoController.listaSolicitacoes();
+	}
+	
+	private void deferirIndeferirSolicitacao(Solicitacao solicitacao, Boolean deferir) {
 		try {
-			solicitacao.getDecisoes().add(new Decisao(deferir, justificativaIndeferimento, colaboradorSelecionado));
+			solicitacao.getDecisoes().add(new Decisao(deferir, consideracoes, colaboradorSelecionado));
 			solicitacaoService.atualizar(solicitacao);
-			FacesUtil.addSucessMessage(String.format("Solicitação %s com sucesso", deferir ? "deferida" : "indeferida"));
+			if (deferir == null) {
+				FacesUtil.addSucessMessage(String.format("Consideração cadastrada com sucesso"));
+			} else {
+				FacesUtil.addSucessMessage(String.format("Solicitação %s com sucesso", deferir ? "deferida" : "indeferida"));
+			}
 		} catch (Exception e) {
 			FacesUtil.addErrorMessage(String.format("Erro ao %d a solicitacao. Erro: %s", deferir ? "deferida" : "indeferida", e.getMessage()));
 		}
@@ -223,20 +232,20 @@ public class SolicitacaoController implements Serializable {
 		this.matriculaColaborador = matriculaColaborador;
 	}
 
-	public String getJustificativaIndeferimento() {
-		return justificativaIndeferimento;
-	}
-
-	public void setJustificativaIndeferimento(String justificativaIndeferimento) {
-		this.justificativaIndeferimento = justificativaIndeferimento;
-	}
-
 	public Colaborador getColaboradorSelecionado() {
 		return colaboradorSelecionado;
 	}
 
 	public void setColaboradorSelecionado(Colaborador colaboradorSelecionado) {
 		this.colaboradorSelecionado = colaboradorSelecionado;
+	}
+
+	public String getConsideracoes() {
+		return consideracoes;
+	}
+
+	public void setConsideracoes(String consideracoes) {
+		this.consideracoes = consideracoes;
 	}
 	
 	
