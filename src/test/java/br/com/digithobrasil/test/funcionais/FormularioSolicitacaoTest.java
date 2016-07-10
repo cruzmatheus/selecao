@@ -11,13 +11,14 @@ import org.openqa.selenium.WebElement;
 public class FormularioSolicitacaoTest extends Pagina {
 	
 	private Fairy fairy = Fairy.create();
+	private String nomeColaborador = "";
 
 	public void novaSolicitacao() {
 		WebElement novaSolicitacaoBtn = driver.findElement(By.id("nova_solicitacao"));
 		novaSolicitacaoBtn.click();
 	}
 	
-//	@Test
+	@Test
 	public void testCadastrarSolicitacaoSemNenhumaInformacao() {
 		novaSolicitacao();
 		click("efetuar_solicitacao");
@@ -27,10 +28,11 @@ public class FormularioSolicitacaoTest extends Pagina {
 	@Test
 	public void testCadastrarSolicitacao() throws InterruptedException {
 		Person person = fairy.person();
+		nomeColaborador = person.firstName() + " " + person.lastName();
 		novaSolicitacao();
-		preencherCampo("iNomeColaborador", person.firstName() + " " + person.lastName());
+		preencherCampo("iNomeColaborador", nomeColaborador);
 		selectOne("iCargoColaborador", "Desenvolvedor");
-		preencherCampo("iMatriculaColaborador", "3213");
+		preencherCampo("iMatriculaColaborador", fairy.baseProducer().randomBetween(1000, 5000)+"");
 		
 		driver.findElement(By.id("iDataNascimentoColaborador")).click();
 		esperarBotaoPorNome("Prev", 10).click();
@@ -64,6 +66,12 @@ public class FormularioSolicitacaoTest extends Pagina {
 		esperarBotaoPorId("efetuar_solicitacao", 10).click();
 		
 		assertTrue(driver.getPageSource().contains("Solicitação cadastrada com sucesso"));
+	}
+	
+	@Test
+	public void testListarSolicitacoes() throws InterruptedException {
+		clickPorNome("Solicitações");
+		selectOne("listaSolicitacoes", nomeColaborador);
 	}
 	
 }

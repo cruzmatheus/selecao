@@ -30,6 +30,10 @@
 			currentPageReportTemplate=" {startRecord} de {endRecord} no total de {totalRecords} - Página: {currentPage}/{totalPages} "
 			emptyMessage="Nenhum registro">
 			
+				<p:column filterBy="#{s.colaborador.matricula}" headerText="Matrícula colaborador" width="4%">
+					<h:outputText value="#{s.colaborador.matricula}"  />
+				</p:column>
+				
 				<p:column filterBy="#{s.colaborador.nome}" headerText="Nome colaborador" width="4%">
 					<h:outputText value="#{s.colaborador.nome}"  />
 				</p:column>

@@ -15,15 +15,14 @@ public class Pagina {
 
 	@Before
 	public void setup() throws ClassNotFoundException, InterruptedException {
-//		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Matheus\\Desktop\\chromedriver.exe");
 		System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.get("http://localhost:8080/selecao");
 	}
 	
-	@After
+//	@After
 	public void tearDown() {
-//		driver.quit();
+		driver.quit();
 	}
 	
 	public void preencherCampo(String nomeCampo, String valor) {
@@ -41,6 +40,11 @@ public class Pagina {
 	 
 	 public void click(String campo) {
 		 WebElement botao = driver.findElement(By.id(campo));
+		 botao.click();
+	 }
+	 
+	 public void clickPorNome(String campo) {
+		 WebElement botao = driver.findElement(By.linkText(campo));
 		 botao.click();
 	 }
 	 
