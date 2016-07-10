@@ -30,12 +30,24 @@ public class Pagina {
 		campo.sendKeys(valor);
 	}
 	
-	 public void selectOne(String idPrefix, String value) throws InterruptedException {
+	public void selectOne(String idPrefix, String value) throws InterruptedException {
         if (value != null && !value.isEmpty()) {
             driver.findElement(By.id(idPrefix + "_label")).click();
             Thread.sleep(250);
             driver.findElement(By.xpath("//div[@id='" + idPrefix + "_panel']/div/ul/li[text()='" + value + "']")).click();
         }
+     }
+	
+	public void selectOneUltimoElemento(String idPrefix) throws InterruptedException {
+        driver.findElement(By.id(idPrefix + "_label")).click();
+        Thread.sleep(250);
+        driver.findElement(By.xpath("//div[@id='" + idPrefix + "_panel']/div/ul/li[last()]")).click();
+     }
+	
+	public void selectOnePrimeiroElemento(String idPrefix) throws InterruptedException {
+        driver.findElement(By.id(idPrefix + "_label")).click();
+        Thread.sleep(250);
+        driver.findElement(By.xpath("//div[@id='" + idPrefix + "_panel']/div/ul/li[2]")).click();
      }
 	 
 	 public void click(String campo) {
@@ -56,6 +68,11 @@ public class Pagina {
 	 public WebElement esperarBotaoPorId(String campo, long segundos) {
 		 WebDriverWait wait = new WebDriverWait(driver, segundos);
 		 return wait.until(ExpectedConditions.elementToBeClickable(By.id(campo)));
+	 }
+	 
+	 public boolean isElementoPresente(String idElemento) {
+		 WebElement elemento = driver.findElement(By.id(idElemento));
+		 return elemento != null;
 	 }
 
 

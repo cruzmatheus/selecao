@@ -56,5 +56,21 @@ public class SolicitacaoTest  {
 		assertEquals(solicitacao.getCustos().size(), 2);
 		assertArrayEquals(solicitacao.getCustos().toArray(), new Custo[] {passagem, hospedagem});
 	}
+	
+	@Test
+	public void testAdicionarDecisao() {
+		Colaborador colaborador = ColaboradorFactory.buildColaborador();
+		solicitacao.adicionarDecisao(true, "O curso é relevante", colaborador);
+		
+		assertTrue(solicitacao.getDecisoes().size() > 0);
+		assertEquals(solicitacao.getDecisoes().get(0).getColaborador().getMatricula(), colaborador.getMatricula());
+	}
+	
+	public void testColaboradorJaAvaliouSolicitacao() {
+		Colaborador colaborador = ColaboradorFactory.buildColaborador();
+		solicitacao.adicionarDecisao(true, "O curso é relevante", colaborador);
+		
+		assertTrue(solicitacao.isColaboradorDecidiu(colaborador));
+	}
 
 }

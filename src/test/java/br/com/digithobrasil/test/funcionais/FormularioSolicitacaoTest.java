@@ -2,8 +2,12 @@ package br.com.digithobrasil.test.funcionais;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
+
 import org.jfairy.Fairy;
 import org.jfairy.producer.person.Person;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -18,14 +22,14 @@ public class FormularioSolicitacaoTest extends Pagina {
 		novaSolicitacaoBtn.click();
 	}
 	
-	@Test
+//	@Test
 	public void testCadastrarSolicitacaoSemNenhumaInformacao() {
 		novaSolicitacao();
 		click("efetuar_solicitacao");
 		assertTrue(driver.getPageSource().contains("Campo necessário"));
 	}
 	
-	@Test
+	@Before
 	public void testCadastrarSolicitacao() throws InterruptedException {
 		Person person = fairy.person();
 		nomeColaborador = person.firstName() + " " + person.lastName();
@@ -46,7 +50,7 @@ public class FormularioSolicitacaoTest extends Pagina {
 		preencherCampo("iAgencia", "1234");
 		preencherCampo("iContaCorrente", "532463-2");
 		
-		preencherCampo("iTituloCurso", "Programacao orientada a objetos");
+		preencherCampo("iTituloCurso", fairy.textProducer().sentence(50));
 		
 		driver.findElement(By.id("iDataCurso")).click();
 		esperarBotaoPorNome("Prev", 10).click();
@@ -61,7 +65,7 @@ public class FormularioSolicitacaoTest extends Pagina {
 		
 		click("adicionar_custo");
 		
-		preencherCampo("iJustificativa", "Aprender acerca da programacao orientada a objetos");
+		preencherCampo("iJustificativa", fairy.textProducer().paragraph());
 		
 		esperarBotaoPorId("efetuar_solicitacao", 10).click();
 		
@@ -71,7 +75,14 @@ public class FormularioSolicitacaoTest extends Pagina {
 	@Test
 	public void testListarSolicitacoes() throws InterruptedException {
 		clickPorNome("Solicitações");
-		selectOne("listaSolicitacoes", nomeColaborador);
+		selectOneUltimoElemento("iColaborador");
+		Thread.sleep(2000);
+		List<WebElement> dataRows = driver.findElements(By.tagName("button"));
+		WebElement btnVisualizarDecisoes = dataRows.get(dataRows.size()-1);
+		btnVisualizarDecisoes.click();
+		Thread.sleep(1000);
+		assertTrue(driver.getPageSource().contains("Decisões"));
 	}
+	
 	
 }

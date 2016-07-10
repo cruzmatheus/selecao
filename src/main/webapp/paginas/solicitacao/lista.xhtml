@@ -57,6 +57,7 @@
 				
 				<p:column width="5%" style="text-align: center;">
 					<p:commandButton 
+						id="btnDeferir"
 						global="false"
 						icon="fa fa-check" title="Deferir"
 						action="#{solicitacaoController.deferirSolicitacao(s)}"
@@ -69,8 +70,9 @@
 						rendered="#{solicitacaoController.isPermitidoDeferirIndeferir(s)}"/>
 						
 					<p:commandButton 
+						id="btnVisualizarDeferimento"
 						global="false"
-						icon="fa fa-list" title="Deferir"
+						icon="fa fa-list" title="Visualizar deferimentos"
 						action="#{decisaoController.visualizarDecisoes(s)}"
 						rendered="#{solicitacaoController.isPermitidoVisualizarDecisoes(s)}"/>
 						
